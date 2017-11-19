@@ -3,6 +3,10 @@
 - [Kakoune](http://kakoune.org/)
 - [Context Free Art](https://www.contextfreeart.org/)
 
+## Screenshot
+
+![Imgur](https://i.imgur.com/wWT43RR.png)
+
 ## Usage
 
 Put `cfdg.kak` in your autoload directory or source it
