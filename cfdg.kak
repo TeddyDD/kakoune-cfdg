@@ -29,11 +29,13 @@ add-highlighter shared/cfdg/adjustment fill attribute
 	functions="${functions}|bitnot|bitor|bitleft|bitright|min|max"
 	functions="${functions}|frame|ftime|rand_static|rand|randint"
 	functions="${functions}|select|let"
+	functions="${functions}|MOVETO|LINETO|ARCTO|CURVETO|CLOSEPOLY|MOVEREL|LINEREL|ARCREL|CURVEREL|STROKE|FILL"
 	cf="CF\:\:Symmetry|CF\:\:Dihedral|CF\:\:Cyclic|CF\:\:p11g|CF\:\:p11m"
-        cf="${cf}|CCF\:\:p2|CF\:\:p2mg|CF\:\:p2mm|CF\:\:Tile|CF\:\:p4|CF\:\:p4m|CF\:\:p4g|CF\:\:p3"
-        cf="${cf}|CF\:\:p3m1|CF\:\:p31m|CF\:\:p6|CF\:\:p6m|CF\:\:AllowOverlap|CF\:\:Alpha|CF\:\:Background"
-        cf="${cf}|CF\:\:BorderDynamic|CF\:\:Color|CF\:\:ColorDepth|CF\:\:Frame|CF\:\:Impure|CF\:\:MaxNatural"
-        cf="${cf}|CF\:\:MinimumSize|CF\:\:Size|CF\:\:Time"
+    cf="${cf}|CCF\:\:p2|CF\:\:p2mg|CF\:\:p2mm|CF\:\:Tile|CF\:\:p4|CF\:\:p4m|CF\:\:p4g|CF\:\:p3"
+    cf="${cf}|CF\:\:p3m1|CF\:\:p31m|CF\:\:p6|CF\:\:p6m|CF\:\:AllowOverlap|CF\:\:Alpha|CF\:\:Background"
+    cf="${cf}|CF\:\:BorderDynamic|CF\:\:Color|CF\:\:ColorDepth|CF\:\:Frame|CF\:\:Impure|CF\:\:MaxNatural"
+    cf="${cf}|CF\:\:MinimumSize|CF\:\:Size|CF\:\:Time"
+    cf="${cf}|CF\:\:Continuous|CF\:\:Align|CF\:\:MiterJoin|CF\:\:RoundJoin|CF\:\:BevelJoin|CF\:\:ButtCap|CF\:\:RoundCap|CF\:\:SquareCap|CF\:\:IsoWidth|CF\:\:EvenOdd"
 
 	types="CIRCLE|SQUARE|TRIANGLE"
 
