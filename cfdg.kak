@@ -67,14 +67,14 @@ add-highlighter shared/cfdg/code regex \d 0:value
 # Indentation
 # ===========
 
-def -hidden cfdg-indent-on-new-line %{
-    eval -draft -itersel %{
+define-command -hidden cfdg-indent-on-new-line %{
+    evaluate-commands -draft -itersel %{
         # preserve previous line indent
-        try %{ exec -draft \;K<a-&> }
+        try %{ execute-keys -draft \;K<a-&> }
         # cleanup trailing white spaces on previous line
-        try %{ exec -draft k<a-x> s \h+$ <ret>"_d }
+        try %{ execute-keys -draft k<a-x> s \h+$ <ret>"_d }
         # copy '#' comment prefix and following white spaces
-        try %{ exec -draft k <a-x> s ^\h*//\h* <ret> y jgh P }
+        try %{ execute-keys -draft k <a-x> s ^\h*//\h* <ret> y jgh P }
     }
 }
 
