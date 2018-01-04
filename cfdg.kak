@@ -16,7 +16,7 @@ hook global BufCreate .*\.cfdg$ %{
 add-highlighter shared/ regions -default code cfdg \
 	comment    '//' $  '' \
 	comment    '/\*' '\*/' '' \
-    	adjustment '\[' '\]' ''
+	adjustment '\[' '\]' ''
 
 add-highlighter shared/cfdg/adjustment fill attribute
 
