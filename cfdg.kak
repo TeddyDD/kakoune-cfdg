@@ -90,8 +90,9 @@ hook global WinSetOption filetype=cfdg  %{
     add-highlighter buffer ref cfdg
 
     # comments
-    set buffer comment_line '//'
-    set buffer comment_block '/*:*/'
+    set-option buffer comment_line '//'
+    set-option buffer comment_block_begin '/*'
+    set-option buffer comment_block_begin '*/'
 }
 
 hook -group cfdg-highlight global WinSetOption filetype=(?!cfdg).* %{
