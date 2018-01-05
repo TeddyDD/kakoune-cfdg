@@ -17,6 +17,8 @@ from `kakrc`.
 - syntax highlighting
 - static completion (function names, keywords)
 - line and block comments set
+- auto indentation (no need to manually indent back after `}`, just go to next
+  line)
 
 ## Todo
 
