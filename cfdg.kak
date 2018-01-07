@@ -82,6 +82,23 @@ define-command -hidden cfdg-indent-on-new-line %(
     )
 )
 
+# Commands
+# ========
+
+define-command cfdg-render -docstring %{ Render file using cfdg.
+File will be saved to the same directory as file with png extension.
+Timeout is set to 10 seconds - for longer renderings you might want
+to use other solutins } \
+%{
+    echo -markup {Error} %sh{
+	filename=$(basename "$kak_bufname")
+    filename="${filename%.*}"
+    out=$(dirname "$kak_buffile")/$filename.png
+    # feel free to tweak params of cfdg command
+    timeout 10 cfdg "$kak_buffile" "$out" 2>&1 | grep "Error" >&1  
+} }
+
+
 # Initialization
 # ==============
 

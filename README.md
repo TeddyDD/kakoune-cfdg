@@ -19,11 +19,30 @@ from `kakrc`.
 - line and block comments set
 - auto indentation (no need to manually indent back after `}`, just go to next
   line)
+- basic rendering command
+
+## Rendering
+
+You can use `:cfdg-render` command to create preview png in directory with cfdg file.
+Timeout is set to 10 seconds but you can change it.
+If you wish to tweak cfdg command params then look into `cfdg-render` command
+defined in `cfdg.kak` file.
+
+You can set Kakoune to render cfdg file on save. Just add following lines 
+your `kakrc`
+
+```
+hook global WinSetOption filetype=cfdg %{
+    hook buffer BufWritePost .* %{
+		cfdg-render
+	}
+}
+```
 
 ## Todo
 
-Would be nice to have: preview on save, better completion,
-linting using `cfdg -C`, basic refactoring (shape -> shape with rules).
+Would be nice to have: better completion, linting using `cfdg -C`,
+basic refactoring (shape -> shape with rules etc).
 PRs welcome.
 
 ## License
