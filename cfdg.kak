@@ -16,13 +16,14 @@ hook global BufCreate .*\.cfdg$ %{
 add-highlighter shared/ regions -default code cfdg \
 	comment    '//' $  '' \
 	comment    '/\*' '\*/' '' \
-	adjustment '\[' '\]' ''
+	adjustment '\[' '\]' '' \
+	string     '"'  '"'  '' 
 
 add-highlighter shared/cfdg/adjustment fill attribute
 
 %sh{
 	keywords="rule|loop|path|finally|if|switch|case|else|transform|clone"
-	keywords="${keywords}|shape|startshape"
+	keywords="${keywords}|shape|startshape|import"
 	functions="infinity|cos|sin|tan|acos|asin|atan|atan2|cosh|sinh|tanh"
 	functions="${functions}|acosh|asinh|atanh|log|log10|exp|sqrt|abs|mod"
 	functions="${functions}|floor|factorial|sg|isNatural|div|divides"
@@ -47,14 +48,18 @@ add-highlighter shared/cfdg/adjustment fill attribute
         printf %s\\n "add-highlighter shared/cfdg/adjustment regex '\b(${functions})\b\(' 1:function"
         printf %s\\n "add-highlighter shared/cfdg/code regex '\b(${functions})\b\(' 1:function"
 
+        # highlight keywords
+        printf %s\\n "add-highlighter shared/cfdg/code regex '\b($keywords)\b' 1:keyword"
+
 }
 
 add-highlighter shared/cfdg/adjustment regex '\b(?:alpha|brightness|flip|hue|time|timescale|rotate|s(?:at(?:uration)?|ize|kew)|trans(?:form)?|[afhrsxyz])\b' 0:builtin
 add-highlighter shared/cfdg/adjustment regex '(\d\.)?\d' 0:value
 
+add-highlighter shared/cfdg/string fill string
+
 # shape names and keywords
 add-highlighter shared/cfdg/code regex '\b((?:start)?shape)\b\s+(\w+)' 1:keyword 2:type
-add-highlighter shared/cfdg/code regex '\b(rule|loop|path|finally|if|switch|case|else|transform|clone)\b\s' 1:keyword
 
 # basic types
 add-highlighter shared/cfdg/code regex '\b(CIRCLE|TRIANGLE|SQUARE)\b' 1:builtin
