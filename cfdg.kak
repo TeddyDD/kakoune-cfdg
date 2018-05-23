@@ -17,7 +17,7 @@ add-highlighter shared/ regions -default code cfdg \
 	comment    '//' $  '' \
 	comment    '/\*' '\*/' '' \
 	adjustment '\[' '\]' '' \
-	string     '"'  '"'  '' 
+	string     '"'  '"'  ''
 
 add-highlighter shared/cfdg/adjustment fill attribute
 
@@ -100,7 +100,7 @@ to use other solutins } \
     filename="${filename%.*}"
     out=$(dirname "$kak_buffile")/$filename.png
     # feel free to tweak params of cfdg command
-    timeout 10 cfdg "$kak_buffile" "$out" 2>&1 | grep "Error" >&1  
+    timeout 10 cfdg "$kak_buffile" "$out" 2>&1 | grep "Error" >&1
 } }
 
 
@@ -119,10 +119,18 @@ hook global WinSetOption filetype=cfdg  %{
     set-option buffer comment_line '//'
     set-option buffer comment_block_begin '/*'
     set-option buffer comment_block_begin '*/'
+
+    # Save extra_word_chars option for restoring when buffer filetype changes to other than 'cfdg'
+    declare-option -hidden str extra_word_chars_save %opt{extra_word_chars}
+    # Consider ':' characters as parts of words.
+    set -add buffer extra_word_chars '\:'
 }
 
 hook -group cfdg-highlight global WinSetOption filetype=(?!cfdg).* %{
     remove-hooks window cfdg-indent
     remove-highlighter cfdg
+
+    # Restore extra_word_chars option.
+    try %{ set buffer extra_word_chars %opt{extra_word_chars_save}}
 }
 
