@@ -7,6 +7,14 @@
 
 ![Imgur](https://i.imgur.com/wWT43RR.png)
 
+You can watch me coding using this plugin at
+[Youtube](https://www.youtube.com/watch?v=Ia5mGlKikZs&feature=youtu.be)
+~7 minutes, timelapse.
+
+## Compatibility
+
+Tested with Kakoune version **2018.04.13**
+
 ## Usage
 
 Put `cfdg.kak` in your autoload directory or source it
