@@ -1,4 +1,4 @@
-# Context Free Art support for Kakoune
+﻿# Context Free Art support for Kakoune
 
 - [Kakoune](http://kakoune.org/)
 - [Context Free Art](https://www.contextfreeart.org/)
@@ -33,7 +33,7 @@ from `kakrc`.
 
 You can use `:cfdg-render` command to create preview png in directory with cfdg file.
 Timeout is set to 10 seconds but you can change it.
-If you wish to tweak cfdg command params then look into `cfdg-render` command
+If you wish to tweak cfdg command parameters then look into `cfdg-render` command
 defined in `cfdg.kak` file.
 
 You can set Kakoune to render cfdg file on save. Just add following lines 
