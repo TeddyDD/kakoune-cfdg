@@ -13,15 +13,15 @@ hook global BufCreate .*\.cfdg$ %{
 # Completion and highlight
 # ========================
 
-add-highlighter shared/ regions -default code cfdg \
-	comment    '//' $  '' \
-	comment    '/\*' '\*/' '' \
-	adjustment '\[' '\]' '' \
-	string     '"'  '"'  ''
+add-highlighter shared/cfdg regions
+add-highlighter shared/cfdg/code default-region group
 
-add-highlighter shared/cfdg/adjustment fill attribute
+add-highlighter shared/cfdg/comment       region '//'  $     fill comment
+add-highlighter shared/cfdg/comment_block region '/\*' '\*/' fill comment
+add-highlighter shared/cfdg/adjustment    region '\['  '\]'  group
+add-highlighter shared/cfdg/string        region '"'   '"'   fill string
 
-%sh{
+evaluate-commands %sh{
 	keywords="rule|loop|path|finally|if|switch|case|else|transform|clone"
 	keywords="${keywords}|shape|startshape|import"
 	functions="infinity|cos|sin|tan|acos|asin|atan|atan2|cosh|sinh|tanh"
@@ -42,32 +42,29 @@ add-highlighter shared/cfdg/adjustment fill attribute
 
         # add to static completion list
         printf %s\\n "hook global WinSetOption filetype=cfdg %{
-            set -add buffer static_words '${keywords}|${functions}:${types}:${cf}' }" | sed 's,|,:,g'
+            set -add buffer static_words ${keywords}|${functions} ${types} ${cf} }" | sed 's,|, ,g'
 
     	# highlight functions
-        printf %s\\n "add-highlighter shared/cfdg/adjustment regex '\b(${functions})\b\(' 1:function"
-        printf %s\\n "add-highlighter shared/cfdg/code regex '\b(${functions})\b\(' 1:function"
+        printf %s\\n "add-highlighter shared/cfdg/adjustment/ regex '\b(${functions})\b\(' 1:function"
+        printf %s\\n "add-highlighter shared/cfdg/code/ regex '\b(${functions})\b\(' 1:function"
 
         # highlight keywords
-        printf %s\\n "add-highlighter shared/cfdg/code regex '\b($keywords)\b' 1:keyword"
+        printf %s\\n "add-highlighter shared/cfdg/code/ regex '\b($keywords)\b' 1:keyword"
 
 }
 
-add-highlighter shared/cfdg/adjustment regex '\b(?:alpha|brightness|flip|hue|time|timescale|rotate|s(?:at(?:uration)?|ize|kew)|trans(?:form)?|[afhrsxyz])\b' 0:builtin
-add-highlighter shared/cfdg/adjustment regex '(\d\.)?\d' 0:value
-
-add-highlighter shared/cfdg/string fill string
+add-highlighter shared/cfdg/adjustment/ regex '\b(?:alpha|brightness|flip|hue|time|timescale|rotate|s(?:at(?:uration)?|ize|kew)|trans(?:form)?|[afhrsxyz])\b' 0:builtin
+add-highlighter shared/cfdg/adjustment/ regex '(\d\.)?\d' 0:value
 
 # shape names and keywords
-add-highlighter shared/cfdg/code regex '\b((?:start)?shape)\b\s+(\w+)' 1:keyword 2:type
+add-highlighter shared/cfdg/code/ regex '\b((?:start)?shape)\b\s+(\w+)' 1:keyword 2:type
 
 # basic types
-add-highlighter shared/cfdg/code regex '\b(CIRCLE|TRIANGLE|SQUARE)\b' 1:builtin
+add-highlighter shared/cfdg/code/ regex '\b(CIRCLE|TRIANGLE|SQUARE)\b' 1:builtin
 # variables
-add-highlighter shared/cfdg/code regex '\h*(\w+::)?(\w+)\s?=\s?' 1:builtin 2:variable
+add-highlighter shared/cfdg/code/ regex '\h*(\w+::)?(\w+)\s?=\s?' 1:builtin 2:variable
 
-add-highlighter shared/cfdg/comment fill comment
-add-highlighter shared/cfdg/code regex \d 0:value
+add-highlighter shared/cfdg/code/ regex \d 0:value
 
 # Indentation
 # ===========
@@ -93,15 +90,15 @@ define-command -hidden cfdg-indent-on-new-line %(
 define-command cfdg-render -docstring %{ Render file using cfdg.
 File will be saved to the same directory as file with png extension.
 Timeout is set to 10 seconds - for longer renderings you might want
-to use other solutins } \
-%{
+to use other solutins } %{
+ evaluate-commands %{
     echo -markup {Error} %sh{
 	filename=$(basename "$kak_bufname")
     filename="${filename%.*}"
     out=$(dirname "$kak_buffile")/$filename.png
     # feel free to tweak params of cfdg command
     timeout 10 cfdg "$kak_buffile" "$out" 2>&1 | grep "Error" >&1
-} }
+}}}
 
 
 # Initialization
@@ -113,7 +110,7 @@ hook global WinSetOption filetype=cfdg  %{
     hook window InsertChar \n -group cfdg-indent cfdg-indent-on-new-line
 
     # highlight
-    add-highlighter buffer ref cfdg
+    add-highlighter window/cfdg ref cfdg
 
     # comments
     set-option buffer comment_line '//'
