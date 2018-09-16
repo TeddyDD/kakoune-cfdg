@@ -13,7 +13,7 @@ You can watch me coding using this plugin at
 
 ## Compatibility
 
-Tested with Kakoune version **2018.04.13**
+Kakoune v2018.09.04
 
 ## Usage
 
@@ -42,8 +42,8 @@ your `kakrc`
 ```
 hook global WinSetOption filetype=cfdg %{
     hook buffer BufWritePost .* %{
-		cfdg-render
-	}
+        cfdg-render
+    }
 }
 ```
 
@@ -56,3 +56,12 @@ PRs welcome.
 ## License
 
 ISC License
+
+## Changelog
+
+- 1:
+    - initial relese
+- 2:
+    - FIX completion of CFDG namespace
+- 3 2018-09-16:
+    - CHANGE Kakoune v2018.09.04 compatibility
