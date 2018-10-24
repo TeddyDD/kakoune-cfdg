@@ -62,6 +62,8 @@ ISC License
 - 1:
     - initial relese
 - 2:
-    - FIX completion of CFDG namespace
+    - _FIX_ completion of CFDG namespace
 - 3 2018-09-16:
-    - CHANGE Kakoune v2018.09.04 compatibility
+    - _CHANGE_ Kakoune v2018.09.04 compatibility
+- 4 2018-10-24:
+	- __CHANGE__ directory layout (plugin code in `rc` directory)
