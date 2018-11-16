@@ -22,29 +22,29 @@ add-highlighter shared/cfdg/adjustment    region '\['  '\]'  group
 add-highlighter shared/cfdg/string        region '"'   '"'   fill string
 
 evaluate-commands %sh{
-	keywords="rule|loop|path|finally|if|switch|case|else|transform|clone"
-	keywords="${keywords}|shape|startshape|import"
-	functions="infinity|cos|sin|tan|acos|asin|atan|atan2|cosh|sinh|tanh"
-	functions="${functions}|acosh|asinh|atanh|log|log10|exp|sqrt|abs|mod"
-	functions="${functions}|floor|factorial|sg|isNatural|div|divides"
-	functions="${functions}|bitnot|bitor|bitleft|bitright|min|max"
-	functions="${functions}|frame|ftime|rand_static|rand|randint"
-	functions="${functions}|select|let"
-	functions="${functions}|MOVETO|LINETO|ARCTO|CURVETO|CLOSEPOLY|MOVEREL|LINEREL|ARCREL|CURVEREL|STROKE|FILL"
-	cf="CF\:\:Symmetry|CF\:\:Dihedral|CF\:\:Cyclic|CF\:\:p11g|CF\:\:p11m"
-    cf="${cf}|CCF\:\:p2|CF\:\:p2mg|CF\:\:p2mm|CF\:\:Tile|CF\:\:p4|CF\:\:p4m|CF\:\:p4g|CF\:\:p3"
-    cf="${cf}|CF\:\:p3m1|CF\:\:p31m|CF\:\:p6|CF\:\:p6m|CF\:\:AllowOverlap|CF\:\:Alpha|CF\:\:Background"
-    cf="${cf}|CF\:\:BorderDynamic|CF\:\:Color|CF\:\:ColorDepth|CF\:\:Frame|CF\:\:Impure|CF\:\:MaxNatural"
-    cf="${cf}|CF\:\:MinimumSize|CF\:\:Size|CF\:\:Time"
-    cf="${cf}|CF\:\:Continuous|CF\:\:Align|CF\:\:MiterJoin|CF\:\:RoundJoin|CF\:\:BevelJoin|CF\:\:ButtCap|CF\:\:RoundCap|CF\:\:SquareCap|CF\:\:IsoWidth|CF\:\:EvenOdd"
+    keywords="rule|loop|path|finally|if|switch|case|else|transform|clone"
+    keywords="${keywords}|shape|startshape|import"
+    functions="infinity|cos|sin|tan|acos|asin|atan|atan2|cosh|sinh|tanh"
+    functions="${functions}|acosh|asinh|atanh|log|log10|exp|sqrt|abs|mod"
+    functions="${functions}|floor|factorial|sg|isNatural|div|divides"
+    functions="${functions}|bitnot|bitor|bitleft|bitright|min|max"
+    functions="${functions}|frame|ftime|rand_static|rand|randint"
+    functions="${functions}|select|let"
+    functions="${functions}|MOVETO|LINETO|ARCTO|CURVETO|CLOSEPOLY|MOVEREL|LINEREL|ARCREL|CURVEREL|STROKE|FILL"
+    cf="CF::Symmetry|CF::Dihedral|CF::Cyclic|CF::p11g|CF::p11m"
+    cf="${cf}|CCF::p2|CF::p2mg|CF::p2mm|CF::Tile|CF::p4|CF::p4m|CF::p4g|CF::p3"
+    cf="${cf}|CF::p3m1|CF::p31m|CF::p6|CF::p6m|CF::AllowOverlap|CF::Alpha|CF::Background"
+    cf="${cf}|CF::BorderDynamic|CF::Color|CF::ColorDepth|CF::Frame|CF::Impure|CF::MaxNatural"
+    cf="${cf}|CF::MinimumSize|CF::Size|CF::Time"
+    cf="${cf}|CF::Continuous|CF::Align|CF::MiterJoin|CF::RoundJoin|CF::BevelJoin|CF::ButtCap|CF::RoundCap|CF::SquareCap|CF::IsoWidth|CF::EvenOdd"
 
-	types="CIRCLE|SQUARE|TRIANGLE"
+    types="CIRCLE|SQUARE|TRIANGLE"
 
         # add to static completion list
         printf %s\\n "hook global WinSetOption filetype=cfdg %{
             set -add buffer static_words ${keywords}|${functions} ${types} ${cf} }" | sed 's,|, ,g'
 
-    	# highlight functions
+        # highlight functions
         printf %s\\n "add-highlighter shared/cfdg/adjustment/ regex '\b(${functions})\b\(' 1:function"
         printf %s\\n "add-highlighter shared/cfdg/code/ regex '\b(${functions})\b\(' 1:function"
 
@@ -93,7 +93,7 @@ Timeout is set to 10 seconds - for longer renderings you might want
 to use other solutins } %{
  evaluate-commands %{
     echo -markup {Error} %sh{
-	filename=$(basename "$kak_bufname")
+    filename=$(basename "$kak_bufname")
     filename="${filename%.*}"
     out=$(dirname "$kak_buffile")/$filename.png
     # feel free to tweak params of cfdg command
@@ -120,7 +120,7 @@ hook global WinSetOption filetype=cfdg  %{
     # Save extra_word_chars option for restoring when buffer filetype changes to other than 'cfdg'
     declare-option -hidden str extra_word_chars_save %opt{extra_word_chars}
     # Consider ':' characters as parts of words.
-    set -add buffer extra_word_chars '\:'
+    set-option -add buffer extra_word_chars :
 }
 
 hook -group cfdg-highlight global WinSetOption filetype=(?!cfdg).* %{

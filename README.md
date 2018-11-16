@@ -66,4 +66,7 @@ ISC License
 - 3 2018-09-16:
     - _CHANGE_ Kakoune v2018.09.04 compatibility
 - 4 2018-10-24:
-	- __CHANGE__ directory layout (plugin code in `rc` directory)
+    - __CHANGE__ directory layout (plugin code in `rc` directory)
+- 5 2018-11-16:
+    - Kakoune v2018.10.27
+    - _FIX_ cf namespace completion
