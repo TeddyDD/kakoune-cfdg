@@ -31,10 +31,10 @@ from `kakrc`.
 
 ## Rendering
 
-You can use `:cfdg-render` command to create preview png in directory with cfdg file.
-Timeout is set to 10 seconds but you can change it.
-If you wish to tweak cfdg command parameters then look into `cfdg-render` command
-defined in `cfdg.kak` file.
+You can use `:cfdg-render` command to create preview png in directory
+with cfdg file.  Timeout is set to 10 seconds but you can change it using
+`cfdg_timeout` option.  If you wish to tweak cfdg command parameter (flags)
+you can use `cfdg_params` option.
 
 You can set Kakoune to render cfdg file on save. Just add following lines 
 your `kakrc`
@@ -69,4 +69,5 @@ ISC License
     - __CHANGE__ directory layout (plugin code in `rc` directory)
 - 5 2018-11-16:
     - Kakoune v2018.10.27
-    - _FIX_ cf namespace completion
+    - _FIX_ CF namespace completion
+    - _ADD_ configuration variables

@@ -3,6 +3,15 @@
 # Author: Daniel Lewna - TeddyDD
 # License: Creative Commons Zero - https://creativecommons.org/publicdomain/zero/1.0/
 
+# Variables
+# =========
+
+# CFDG params
+declare-option -docstring 'Params passed to cfdg command' str cfdg_params
+
+# timeout
+declare-option -docstring 'Rendering timeout' int cfdg_timeout 10 
+
 # Detection
 # =========
 
@@ -92,12 +101,11 @@ File will be saved to the same directory as file with png extension.
 Timeout is set to 10 seconds - for longer renderings you might want
 to use other solutins } %{
  evaluate-commands %{
-    echo -markup {Error} %sh{
-    filename=$(basename "$kak_bufname")
-    filename="${filename%.*}"
-    out=$(dirname "$kak_buffile")/$filename.png
+    echo -debug {Error} %sh{
+    filename="$(basename $kak_bufname .cfdg)"
+    out="$(dirname $kak_buffile)/$filename.png"
     # feel free to tweak params of cfdg command
-    timeout 10 cfdg "$kak_buffile" "$out" 2>&1 | grep "Error" >&1
+    timeout "$kak_opt_cfdg_timeout" cfdg $kak_opt_cfdg_params -- "$kak_buffile" "$out" 2>&1 | grep "Error" >&1
 }}}
 
 
