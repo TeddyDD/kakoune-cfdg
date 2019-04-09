@@ -28,6 +28,10 @@ add-highlighter shared/cfdg/code default-region group
 add-highlighter shared/cfdg/comment       region '//'  $     fill comment
 add-highlighter shared/cfdg/comment_block region '/\*' '\*/' fill comment
 add-highlighter shared/cfdg/adjustment    region '\['  '\]'  group
+
+add-highlighter shared/cfdg/shape_params  region '\b(shape|path)\b\s+\w+\(' '\)' regions
+add-highlighter shared/cfdg/shape_params/shape default-region group
+
 add-highlighter shared/cfdg/string        region '"'   '"'   fill string
 
 evaluate-commands %sh{
@@ -47,6 +51,8 @@ evaluate-commands %sh{
     cf="${cf}|CF::MinimumSize|CF::Size|CF::Time"
     cf="${cf}|CF::Continuous|CF::Align|CF::MiterJoin|CF::RoundJoin|CF::BevelJoin|CF::ButtCap|CF::RoundCap|CF::SquareCap|CF::IsoWidth|CF::EvenOdd"
 
+    parameters="shape|natural|adjustment|number|vector\d\d?"
+
     types="CIRCLE|SQUARE|TRIANGLE"
 
         # add to static completion list
@@ -60,13 +66,18 @@ evaluate-commands %sh{
         # highlight keywords
         printf %s\\n "add-highlighter shared/cfdg/code/ regex '\b($keywords)\b' 1:keyword"
 
+		# shape parameter types
+		printf %s\\n "add-highlighter shared/cfdg/shape_params/args region '\(' '\)' regex '(${parameters})\s(\w+),?' 1:builtin"
 }
 
 add-highlighter shared/cfdg/adjustment/ regex '\b(?:alpha|brightness|flip|hue|time|timescale|rotate|s(?:at(?:uration)?|ize|kew)|trans(?:form)?|[afhrsxyz])\b' 0:builtin
 add-highlighter shared/cfdg/adjustment/ regex '(\d\.)?\d' 0:value
 
 # shape names and keywords
-add-highlighter shared/cfdg/code/ regex '\b((?:start)?shape)\b\s+(\w+)' 1:keyword 2:type
+add-highlighter shared/cfdg/code/ regex '\b((?:start)?shape|path)\b\s+(\w+)' 1:keyword 2:type
+
+# shape with params, same as above
+add-highlighter shared/cfdg/shape_params/shape/ regex '\b(shape|path)\b\s+(\w+)' 1:keyword 2:type
 
 # basic types
 add-highlighter shared/cfdg/code/ regex '\b(CIRCLE|TRIANGLE|SQUARE)\b' 1:builtin

@@ -73,3 +73,5 @@ ISC License
     - _ADD_ configuration variables
 - master:
     - _ADD_ number keyword
+    - _FIX_ highlight shape param types
+    - _FIX_ highlight paths definitions with params
