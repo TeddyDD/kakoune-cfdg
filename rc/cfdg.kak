@@ -32,7 +32,7 @@ add-highlighter shared/cfdg/string        region '"'   '"'   fill string
 
 evaluate-commands %sh{
     keywords="rule|loop|path|finally|if|switch|case|else|transform|clone"
-    keywords="${keywords}|shape|startshape|import"
+    keywords="${keywords}|shape|startshape|import|number"
     functions="infinity|cos|sin|tan|acos|asin|atan|atan2|cosh|sinh|tanh"
     functions="${functions}|acosh|asinh|atanh|log|log10|exp|sqrt|abs|mod"
     functions="${functions}|floor|factorial|sg|isNatural|div|divides"
