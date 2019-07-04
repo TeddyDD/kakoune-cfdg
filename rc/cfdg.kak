@@ -19,6 +19,8 @@ hook global BufCreate .*\.cfdg$ %{
     set buffer filetype cfdg
 }
 
+provide-module cfdg %§
+
 # Completion and highlight
 # ========================
 
@@ -119,12 +121,15 @@ to use other solutins } %{
     timeout "$kak_opt_cfdg_timeout" cfdg $kak_opt_cfdg_params -- "$kak_buffile" "$out" 2>&1 | grep "Error" >&1
 }}}
 
+§ # Module
+
 
 # Initialization
 # ==============
 
 
 hook global WinSetOption filetype=cfdg  %{
+    require-module cfdg
     # indent
     hook window InsertChar \n -group cfdg-indent cfdg-indent-on-new-line
 
