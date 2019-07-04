@@ -71,7 +71,9 @@ ISC License
     - Kakoune v2018.10.27
     - _FIX_ CF namespace completion
     - _ADD_ configuration variables
-- master:
+- 6 2019-07-04:
+    - **Kakoune v2019.07.01**
+    - __CHANGE__ use modules
     - _ADD_ number keyword
     - _FIX_ highlight shape param types
     - _FIX_ highlight paths definitions with params
