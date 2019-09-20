@@ -1,43 +1,58 @@
 ﻿# Context Free Art support for Kakoune
 
-- [Kakoune](http://kakoune.org/)
-- [Context Free Art](https://www.contextfreeart.org/)
+- [Kakoune]
+- [Context Free Art]
 
 ## Screenshot
 
-![Imgur](https://i.imgur.com/wWT43RR.png)
+![Imgur]
 
-You can watch me coding using this plugin at
-[Youtube](https://www.youtube.com/watch?v=Ia5mGlKikZs&feature=youtu.be)
-~7 minutes, timelapse.
+You can watch me coding using this plugin at [Youtube] \~7 minutes,
+timelapse.
 
 ## Compatibility
 
-Kakoune v2018.09.04
+Kakoune v2019.07.01
 
 ## Usage
 
-Put `cfdg.kak` in your autoload directory or source it
-from `kakrc`.
+Install it using [plug.kak]
+
+```
+plug "TeddyDD/kakoune-cfdg"
+```
+
+or manually: put `cfdg.kak` in your autoload directory or source it from
+`kakrc`.
+
+Snippets are usable with [kakoune-snippets]
+
+```
+plug "occivink/kakoune-snippets" config %{
+    set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-cfdg/snippets"
+    # some other kakoune-snippets related configurations
+}
+```
 
 ## Features
 
 - syntax highlighting
 - static completion (function names, keywords)
 - line and block comments set
-- auto indentation (no need to manually indent back after `}`, just go to next
-  line)
+- auto indentation (no need to manually indent back after `}`, just go
+  to next line)
 - basic rendering command
+- snippets
 
 ## Rendering
 
 You can use `:cfdg-render` command to create preview png in directory
-with cfdg file.  Timeout is set to 10 seconds but you can change it using
-`cfdg_timeout` option.  If you wish to tweak cfdg command parameter (flags)
-you can use `cfdg_params` option.
+with cfdg file. Timeout is set to 10 seconds but you can change it using
+`cfdg_timeout` option. If you wish to tweak cfdg command parameter
+(flags) you can use `cfdg_params` option.
 
-You can set Kakoune to render cfdg file on save. Just add following lines 
-your `kakrc`
+You can set Kakoune to render cfdg file on save. Just add following
+lines your `kakrc`
 
 ```
 hook global WinSetOption filetype=cfdg %{
@@ -49,9 +64,8 @@ hook global WinSetOption filetype=cfdg %{
 
 ## Todo
 
-Would be nice to have: better completion, linting using `cfdg -C`,
-basic refactoring (shape -> shape with rules etc).
-PRs welcome.
+Would be nice to have: better completion, linting using `cfdg -C`, basic
+refactoring (shape -\> shape with rules etc). PRs welcome.
 
 ## License
 
@@ -62,18 +76,27 @@ ISC License
 - 1:
     - initial relese
 - 2:
-    - _FIX_ completion of CFDG namespace
+    - *FIX* completion of CFDG namespace
 - 3 2018-09-16:
-    - _CHANGE_ Kakoune v2018.09.04 compatibility
+    - *CHANGE* Kakoune v2018.09.04 compatibility
 - 4 2018-10-24:
-    - __CHANGE__ directory layout (plugin code in `rc` directory)
+    - **CHANGE** directory layout (plugin code in `rc` directory)
 - 5 2018-11-16:
     - Kakoune v2018.10.27
-    - _FIX_ CF namespace completion
-    - _ADD_ configuration variables
+    - *FIX* CF namespace completion
+    - *ADD* configuration variables
 - 6 2019-07-04:
     - **Kakoune v2019.07.01**
-    - __CHANGE__ use modules
-    - _ADD_ number keyword
-    - _FIX_ highlight shape param types
-    - _FIX_ highlight paths definitions with params
+    - **CHANGE** use modules
+    - *ADD* number keyword
+    - *FIX* highlight shape param types
+    - *FIX* highlight paths definitions with params
+- 7 2019-09-21:
+    - *ADD* snippets
+
+[Kakoune]: http://kakoune.org/
+[Context Free Art]: https://www.contextfreeart.org/
+[Imgur]: https://i.imgur.com/wWT43RR.png
+[Youtube]: https://www.youtube.com/watch?v=Ia5mGlKikZs&feature=youtu.be
+[plug.kak]: https://github.com/andreyorst/plug.kak
+[kakoune-snippets]: https://github.com/occivink/kakoune-snippets
