@@ -19,6 +19,39 @@ hook global BufCreate .*\.cfdg$ %{
     set buffer filetype cfdg
 }
 
+# Initialization
+# ==============
+
+
+hook global WinSetOption filetype=cfdg  %{
+    require-module cfdg
+    # indent
+    hook window InsertChar \n -group cfdg-indent cfdg-indent-on-new-line
+
+    # highlight
+    add-highlighter window/cfdg ref cfdg
+
+    # comments
+    set-option window comment_line '//'
+    set-option window comment_block_begin '/*'
+    set-option window comment_block_end '*/'
+
+    # Save extra_word_chars option for restoring when buffer filetype changes to other than 'cfdg'
+    declare-option -hidden str extra_word_chars_save %opt{extra_word_chars}
+    # Consider ':' characters as parts of words.
+    set-option -add window extra_word_chars :
+    set-option window static_words %opt{cfdg_static_words}
+}
+
+hook -group cfdg-highlight global WinSetOption filetype=(?!cfdg).* %{
+    remove-hooks window cfdg-indent
+    remove-highlighter window/cfdg
+
+    # Restore extra_word_chars option.
+    try %{ set window extra_word_chars %opt{extra_word_chars_save}}
+}
+
+
 provide-module cfdg %§
 
 # Completion and highlight
@@ -58,8 +91,7 @@ evaluate-commands %sh{
     types="CIRCLE|SQUARE|TRIANGLE"
 
         # add to static completion list
-        printf %s\\n "hook global WinSetOption filetype=cfdg %{
-            set -add buffer static_words ${keywords}|${functions} ${types} ${cf} }" | sed 's,|, ,g'
+        printf %s\\n "declare-option str-list cfdg_static_words ${keywords}|${functions} ${types} ${cf}" | sed 's,|, ,g'
 
         # highlight functions
         printf %s\\n "add-highlighter shared/cfdg/adjustment/ regex '\b(${functions})\b\(' 1:function"
@@ -122,36 +154,3 @@ to use other solutins } %{
 }}}
 
 § # Module
-
-
-# Initialization
-# ==============
-
-
-hook global WinSetOption filetype=cfdg  %{
-    require-module cfdg
-    # indent
-    hook window InsertChar \n -group cfdg-indent cfdg-indent-on-new-line
-
-    # highlight
-    add-highlighter window/cfdg ref cfdg
-
-    # comments
-    set-option buffer comment_line '//'
-    set-option buffer comment_block_begin '/*'
-    set-option buffer comment_block_begin '*/'
-
-    # Save extra_word_chars option for restoring when buffer filetype changes to other than 'cfdg'
-    declare-option -hidden str extra_word_chars_save %opt{extra_word_chars}
-    # Consider ':' characters as parts of words.
-    set-option -add buffer extra_word_chars :
-}
-
-hook -group cfdg-highlight global WinSetOption filetype=(?!cfdg).* %{
-    remove-hooks window cfdg-indent
-    remove-highlighter cfdg
-
-    # Restore extra_word_chars option.
-    try %{ set buffer extra_word_chars %opt{extra_word_chars_save}}
-}
-

@@ -93,6 +93,10 @@ ISC License
     - *FIX* highlight paths definitions with params
 - 7 2019-09-21:
     - *ADD* snippets
+- 8 2019-10-02:
+	- *FIX* code completion
+	- *FIX* remove highlighters when changing filetype
+	- *FIX* change extra_word_chars scope to window
 
 [Kakoune]: http://kakoune.org/
 [Context Free Art]: https://www.contextfreeart.org/
