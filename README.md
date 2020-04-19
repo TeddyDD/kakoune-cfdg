@@ -94,9 +94,11 @@ ISC License
 - 7 2019-09-21:
     - *ADD* snippets
 - 8 2019-10-02:
-	- *FIX* code completion
-	- *FIX* remove highlighters when changing filetype
-	- *FIX* change extra_word_chars scope to window
+    - *FIX* code completion
+    - *FIX* remove highlighters when changing filetype
+    - *FIX* change extra_word_chars scope to window
+- 9 2020-04-19:
+    - *FIX* inconsistent indentation error when loaded
 
 [Kakoune]: http://kakoune.org/
 [Context Free Art]: https://www.contextfreeart.org/

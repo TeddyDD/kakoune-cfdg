@@ -10,7 +10,7 @@
 declare-option -docstring 'Params passed to cfdg command' str cfdg_params
 
 # timeout
-declare-option -docstring 'Rendering timeout' int cfdg_timeout 10 
+declare-option -docstring 'Rendering timeout' int cfdg_timeout 10
 
 # Detection
 # =========
@@ -104,8 +104,8 @@ evaluate-commands %sh{
         # highlight keywords
         printf %s\\n "add-highlighter shared/cfdg/code/ regex '\b($keywords)\b' 1:keyword"
 
-		# shape parameter types
-		printf %s\\n "add-highlighter shared/cfdg/shape_params/args region '\(' '\)' regex '(${parameters})\s(\w+),?' 1:builtin"
+        # shape parameter types
+        printf %s\\n "add-highlighter shared/cfdg/shape_params/args region '\(' '\)' regex '(${parameters})\s(\w+),?' 1:builtin"
 }
 
 add-highlighter shared/cfdg/adjustment/ regex '\b(?:alpha|brightness|flip|hue|time|timescale|rotate|s(?:at(?:uration)?|ize|kew)|trans(?:form)?|[afhrsxyz])\b' 0:builtin
@@ -145,11 +145,11 @@ define-command -hidden cfdg-indent-on-new-line %(
 # Commands
 # ========
 
-define-command cfdg-render -docstring %{ Render file using cfdg.
+define-command -docstring 'Render file using cfdg.
 File will be saved to the same directory as file with png extension.
 Timeout is set to 10 seconds - for longer renderings you might want
-to use other solutins } %{
- evaluate-commands %{
+to use other solutins' \
+cfdg-render %{ evaluate-commands %{
     echo -debug {Error} %sh{
     filename="$(basename $kak_bufname .cfdg)"
     out="$(dirname $kak_buffile)/$filename.png"
