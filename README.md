@@ -12,7 +12,7 @@ timelapse.
 
 ## Compatibility
 
-Kakoune v2019.07.01
+Kakoune v2020.01.16
 
 ## Usage
 
